@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('openPrivacyPolicy').addEventListener('click', (e) => {
     e.preventDefault();
     chrome.tabs.create({
-      url: "https://用户名.github.io/仓库名/"
+      url: "https://github.com/HiSixcc/CozeKnow"
     });
   });
 }); 

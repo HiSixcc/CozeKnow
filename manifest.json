@@ -8,9 +8,9 @@
   "minimum_chrome_version": "88",
   "short_name": "CozeKnow",
   "permissions": [
-    "storage",    // 用于存储用户的Access Token和知识库ID
-    "activeTab",  // 用于获取当前标签页的内容
-    "scripting"   // 用于执行内容脚本获取页面内容
+    "storage",
+    "activeTab",
+    "scripting"
   ],
   "action": {
     "default_popup": "popup.html",
@@ -34,5 +34,5 @@
       "description": "打开导入助手"
     }
   },
-  "privacy_policy_url": "https://HiSixcc.github.io/CozeKnow/"
+  "privacy_policy": "https://github.com/HiSixcc/CozeKnow"
 } 
