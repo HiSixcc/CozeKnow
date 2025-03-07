@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    /* 全局动画变量 */
+    :root {
+      --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-duration: 0.3s;
+    }
+
+    body {
+      width: 320px;
+      padding: 0;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: white;
+      opacity: 0;
+      animation: fadeIn 0.5s var(--transition-timing) forwards;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .container {
+      background: white;
+      padding: 16px;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.5s var(--transition-timing) 0.2s forwards;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 18px;
+      color: #1a73e8;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: #5f6368;
+    }
+
+    .header p {
+      margin: 8px 0;
+      font-size: 13px;
+      color: #5f6368;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #5f6368;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #dadce0;
+      border-radius: 10px;
+      font-size: 14px;
+      color: #3c4043;
+      box-sizing: border-box;
+      transition: all var(--transition-duration) var(--transition-timing);
+      transform-origin: top left;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #1a73e8;
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+      transform: scale(1.02);
+    }
+
+    input::placeholder {
+      color: #9aa0a6;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-duration) var(--transition-timing);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
+    }
+
+    button:active::after {
+      animation: ripple 1s ease-out;
+    }
+
+    #save {
+      background: #fff;
+      color: #1a73e8;
+      border: 1px solid #1a73e8;
+    }
+
+    #save:hover {
+      background: #f6fafe;
+    }
+
+    #import {
+      background: #1a73e8;
+      color: white;
+    }
+
+    #import:hover {
+      background: #1557b0;
+    }
+
+    button:disabled {
+      background: #dadce0;
+      border-color: #dadce0;
+      color: #9aa0a6;
+      cursor: not-allowed;
+    }
+
+    .status {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      display: none;
+      animation: slideDown 0.4s var(--transition-timing);
+    }
+
+    .success {
+      background: #e6f4ea;
+      color: #1e8e3e;
+      border: 1px solid #d2e3d8;
+    }
+
+    .error {
+      background: #fce8e6;
+      color: #d93025;
+      border: 1px solid #f6d9d8;
+    }
+
+    .tip {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #5f6368;
+      text-align: center;
+      padding: 12px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .tip p {
+      margin: 0 0 8px;
+      font-weight: 500;
+      color: #202124;
+    }
+
+    .tip ul {
+      margin: 0;
+      padding-left: 20px;
+      text-align: left;
+      margin-bottom: 12px;
+    }
+
+    .tip li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .tip li:last-child {
+      margin-bottom: 0;
+    }
+
+    .tip-links {
+      margin-top: 12px;
+      text-align: left;
+      padding-left: 0;
+    }
+
+    .settings-link {
+      display: inline-block;
+      font-size: 12px;
+      color: #1a73e8;
+      text-decoration: none;
+      transition: color var(--transition-duration) var(--transition-timing);
+      line-height: 1.8;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-10px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+      }
+      20% {
+        transform: scale(25, 25);
+        opacity: 0.3;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(40, 40);
+      }
+    }
+
+    /* 添加图标样式 */
+    .icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 12px;
+      animation: bounce 1s var(--transition-timing);
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+
+    /* 添加加载动画 */
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* 模态框样式 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .modal-content {
+      position: relative;
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 0;
+      width: 85%;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      animation: modalShow 0.5s var(--transition-timing);
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #e8eaed;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 16px;
+      color: #202124;
+    }
+
+    .close {
+      color: #5f6368;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .close:hover {
+      color: #202124;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .success-icon {
+      width: 48px;
+      height: 48px;
+      background: #e6f4ea;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #1e8e3e;
+      margin: 0 auto 16px;
+      animation: scaleIn 0.5s var(--transition-timing);
+    }
+
+    .import-details {
+      text-align: center;
+    }
+
+    .import-details p {
+      margin: 8px 0;
+      font-size: 13px;
+      color: #5f6368;
+    }
+
+    .import-details .title {
+      color: #202124;
+      font-weight: 500;
+    }
+
+    @keyframes modalShow {
+      from {
+        transform: scale(0.8) translateY(-40px);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .tooltip {
+      position: relative;
+      margin-left: 8px;
+    }
+
+    .tooltip-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f1f3f4;
+      color: #5f6368;
+      font-size: 12px;
+      cursor: help;
+    }
+
+    .tooltip-text {
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+      background: #202124;
+      color: white;
+      font-size: 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s var(--transition-timing);
+      z-index: 100;
+      cursor: pointer;
+      transform: translateX(-75%);
+    }
+
+    .tooltip-text::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 75%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #202124;
+    }
+
+    .tooltip:hover .tooltip-text {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-75%) translateY(-8px);
+    }
+
+    .tooltip-link {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .tooltip-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="images/icon48.png" alt="Logo" class="icon">
+      <h1>Coze知识库导入助手</h1>
+      <p class="subtitle">一键导入网页内容到Coze知识库</p>
+    </div>
+
+    <div class="form-group">
+      <label for="token">Access Token</label>
+      <div class="input-wrapper">
+        <input type="password" id="token" placeholder="请输入Coze Access Token">
+        <div class="tooltip">
+          <span class="tooltip-icon">?</span>
+          <span class="tooltip-text">点击下方链接前往获取</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="datasetId">知识库ID</label>
+      <div class="input-wrapper">
+        <input type="text" id="datasetId" placeholder="请输入知识库ID">
+        <div class="tooltip">
+          <span class="tooltip-icon">?</span>
+          <span class="tooltip-text">在知识库详情页面查看ID</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button id="save">保存配置</button>
+      <button id="import">导入当前页面</button>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <div class="tip">
+      <p>使用说明：</p>
+      <ul>
+        <li>首次使用请先配置Access Token和知识库ID</li>
+        <li>所有配置信息仅保存在本地</li>
+        <li>支持一键导入当前浏览的网页内容</li>
+        <li>请妥善保管您的Token，切勿泄露</li>
+      </ul>
+      <div class="tip-links">
+        <a href="#" id="openCozeSettings" class="settings-link">
+          在Coze开发者设置中获取Access Token
+        </a>
+        <br>
+        <a href="#" id="openDatasetGuide" class="settings-link">
+          查看如何获取知识库ID
+        </a>
+        <br>
+        <a href="#" id="openPrivacyPolicy" class="settings-link">
+          查看隐私政策
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- 成功提示模态框 -->
+  <div id="successModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>导入成功</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="success-icon">✓</div>
+        <div class="import-details">
+          <p class="title"></p>
+          <p class="url"></p>
+          <p class="size"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html> 

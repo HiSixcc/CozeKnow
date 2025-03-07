@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "CozeKnow - Coze知识库导入助手",
+  "version": "1.0.0",
+  "description": "一键导入网页内容到Coze知识库，支持一键保存、批量导入、自动分段，让知识库管理更轻松。",
+  "author": "admin@ntun.cn",
+  "homepage_url": "https://www.coze.cn",
+  "minimum_chrome_version": "88",
+  "short_name": "CozeKnow",
+  "permissions": [
+    "storage",    // 用于存储用户的Access Token和知识库ID
+    "activeTab",  // 用于获取当前标签页的内容
+    "scripting"   // 用于执行内容脚本获取页面内容
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "打开导入助手"
+    }
+  },
+  "privacy_policy_url": "https://用户名.github.io/仓库名/"
+} 
