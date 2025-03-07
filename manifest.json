@@ -6,6 +6,7 @@
   "author": "admin@ntun.cn",
   "homepage_url": "https://www.coze.cn",
   "minimum_chrome_version": "88",
+  "minimum_edge_version": "88",
   "short_name": "CozeKnow",
   "permissions": [
     "storage",
@@ -33,6 +34,5 @@
       },
       "description": "打开导入助手"
     }
-  },
-  "privacy_policy": "https://github.com/HiSixcc/CozeKnow"
+  }
 } 

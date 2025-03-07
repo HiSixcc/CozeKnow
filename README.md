@@ -31,4 +31,11 @@
 ## 隐私说明
 
 - 所有配置信息仅存储在本地浏览器中
-- 不会将您的token等敏感信息上传到任何第三方服务器 
+- 不会将您的token等敏感信息上传到任何第三方服务器
+
+## 安装
+
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/[扩展ID].svg)](https://chrome.google.com/webstore/detail/[扩展ID])
+
+- [Chrome商店安装页面](https://chrome.google.com/webstore/detail/[扩展ID])
+- 等待审核通过后即可安装使用 
