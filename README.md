@@ -2,6 +2,17 @@
 
 这是一个Chrome浏览器扩展,可以方便地将当前网页内容导入到Coze知识库中。
 
+## 开源地址
+
+- GitHub: [https://github.com/HiSixcc/CozeKnow](https://github.com/HiSixcc/CozeKnow)
+- 问题反馈: [Issues](https://github.com/HiSixcc/CozeKnow/issues)
+- 开源协议: MIT License
+
+[![GitHub stars](https://img.shields.io/github/stars/HiSixcc/CozeKnow.svg?style=social&label=Star)](https://github.com/HiSixcc/CozeKnow)
+[![GitHub forks](https://img.shields.io/github/forks/HiSixcc/CozeKnow.svg?style=social&label=Fork)](https://github.com/HiSixcc/CozeKnow)
+[![GitHub issues](https://img.shields.io/github/issues/HiSixcc/CozeKnow.svg)](https://github.com/HiSixcc/CozeKnow/issues)
+[![GitHub license](https://img.shields.io/github/license/HiSixcc/CozeKnow.svg)](https://github.com/HiSixcc/CozeKnow/blob/main/LICENSE)
+
 ## 功能特性
 
 - 支持将当前浏览的网页内容一键导入到Coze知识库
